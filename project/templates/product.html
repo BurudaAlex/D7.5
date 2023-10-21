@@ -1,0 +1,35 @@
+<!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}!
+{% block title %}
+Product
+{% endblock title %}
+
+
+{% block content %}
+   <h1>全て商品</h1>
+    <h3>{{ time_now|date:'M d Y' }}</h3>
+   <hr>
+   {% if product %}
+       <table>
+           <tr>
+               <td>名</td>
+               <td>内容</td>
+               <td>カテゴリー</td>
+               <td>値段</td>
+               <td>数</td>
+           </tr>
+
+           <tr>
+               <td>{{ product.name }}</td>
+               <td>{{ product.description|truncatechars:20 }}</td>
+               <td>{{ product.category.name }}</td>
+               <td>{{ product.price|currency}}</td>
+               <td>{{ product.quantity }}</td>
+           </tr>
+       </table>
+   {% else %}
+    <h2>商品無し</h2>
+   {% endif %}
+{% endblock content %}
